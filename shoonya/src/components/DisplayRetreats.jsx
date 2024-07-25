@@ -10,7 +10,7 @@ function DisplayRetreats({retreats}) {
                 retreats.map(retreat => <CardComponent key={retreat.id} title={retreat.title}
                     description={retreat.description} date={retreat.date}
                     location={retreat.location} price={retreat.price}
-                    image={retreat.image}
+                    image={retreat.image} duration={retreat.duration}
                  />) :
                  <div>No data to display</div>
             }
