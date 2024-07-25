@@ -1,25 +1,25 @@
 import React from 'react'
 
-function CardComponent() {
+function CardComponent({title, description, date, location, price, image}) {
     return (
         <div className='w-full bg-lightBrown rounded p-4'>
-            <img class="w-full sm:w-24 sm:h-24 md:w-48 md:h-auto rounded  " 
-            src="https://images.pexels.com/photos/1564839/pexels-photo-1564839.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt=""  />
+            <img className="w-full sm:w-60 h-60 object-cover rounded"
+            src={image}
+            alt={title}  />
             <div className='font-semibold mt-2'>
-            Forest Yoga Retreat
+            {title}
             </div>
             <div className='test-sm mt-2'>
-                Join us for rejuvinating yoga in the heart of the forest. Experience tranquility and peace.
+                {description}
             </div>
             <div className='test-sm mt-2'>
-                Date: June 10-15, 2024
+                Date: {date}
             </div>
             <div className='test-sm mt-2'>
-                Location: Redwood Forest, California
+                Location: {location}
             </div>
             <div className='font-semibold sm:font-normal test-sm mt-2'>
-                Price: $1200
+                Price: ${price}
             </div>
         </div>
     )

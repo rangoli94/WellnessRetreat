@@ -28,28 +28,25 @@ export default function Dropdown({title}) {
       >
         <div className="py-1">
           <MenuItem>
-            <a
-              href="#"
+            <div
               className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               Account settings
-            </a>
+            </div>
           </MenuItem>
           <MenuItem>
-            <a
-              href="#"
+            <div
               className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               Support
-            </a>
+            </div>
           </MenuItem>
           <MenuItem>
-            <a
-              href="#"
+            <div
               className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               License
-            </a>
+            </div>
           </MenuItem>
           <form action="#" method="POST">
             <MenuItem>

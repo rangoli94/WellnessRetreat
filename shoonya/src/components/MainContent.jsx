@@ -1,12 +1,34 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
 import DatePickerComponent from './DatePickerComponent/DatePickerComponent'
-import DatePicker from 'react-datepicker';
 import DisplayRetreats from './DisplayRetreats';
+import axios from 'axios';
+import Loader from './Loader/Loader';
 
-function
-  MainContent() {
-  const [startDate, setStartDate] = useState(new Date());
+function MainContent() {
+  const [retreats, setRetreats] = useState([])
+  const [currPage, setCurrPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  console.log(currPage)
+
+  const fetchData = async (url, setter) => {
+    try {
+      setIsLoading(true)
+      const response = await axios.get(url)
+      setError(null)
+      setter(response?.data)
+    } catch(err) {
+      setError(err.message || 'An error occurred');
+    } finally {
+      setIsLoading(false)
+    }
+
+  }
+
+  useEffect(() => {
+    fetchData(`https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats?page=${currPage}&limit=3`,setRetreats)
+  }, [currPage])
 
   return (
     <div className='py-5 w-full'>
@@ -29,15 +51,34 @@ function
           placeholder="Search Retreats by Title"
         />
       </div>
-      <DisplayRetreats />
+      {
+        isLoading ? <Loader /> :
+        error ? <div>{error}</div> :
+        <DisplayRetreats retreats={retreats} />
+      }
+      
       <div className='flex justify-center space-x-4'>
         <button
-          className="px-4 py-2 bg-darkBlue text-white font-semibold rounded-lg shadow-md hover:bg-lightBlue focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          onClick={() => setCurrPage(prev => prev - 1)}
+          disabled={currPage === 1}
+          className={`px-4 py-2 font-semibold rounded-lg 
+            ${currPage === 1 ?
+              "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
+              "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
+            }
+            focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
         >
           Previous
         </button>
         <button
-          className="px-4 py-2 bg-darkBlue text-white font-semibold rounded-lg shadow-md hover:bg-lightBlue focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          onClick={() => setCurrPage(prev => prev + 1)}
+          disabled={retreats.length <= 0}
+          className={`px-4 py-2 font-semibold rounded-lg 
+            ${retreats.length <= 0 ?
+              "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
+              "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
+            }
+            focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
         >
           Next
         </button>
@@ -47,5 +88,4 @@ function
   )
 }
 
-export default
-  MainContent
+export default MainContent
