@@ -23,7 +23,7 @@ export default function Dropdown({title, handleTypeChange, retreatType}) {
         className="absolute 
         left-0 z-10 mt-2 w-56 
         origin-top-right rounded-md 
-        bg-white w-full
+        bg-white w-full sm:w-auto
         shadow-lg ring-1 ring-black ring-opacity-5 
         transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform 
         data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 

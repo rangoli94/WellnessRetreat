@@ -4,6 +4,7 @@ import DatePickerComponent from './DatePickerComponent/DatePickerComponent'
 import DisplayRetreats from './DisplayRetreats';
 import axios from 'axios';
 import Loader from './Loader/Loader';
+import { useDebounce } from 'use-debounce';
 
 function MainContent() {
   const [allRetreats, setAllRetreats] = useState([])
@@ -13,6 +14,8 @@ function MainContent() {
   const [error, setError] = useState(null)
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [retreatType, setRetreatType] = useState("")
+  const [searchTitle, setSearchTitle] = useState("")
+  const [searchValue] = useDebounce(searchTitle, 100);
   console.log(currPage)
 
   const fetchData = async (url, setter) => {
@@ -35,8 +38,10 @@ function MainContent() {
   // },[])
 
   useEffect(() => {
-    fetchData(`https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats?page=${currPage}&limit=3&tag=${retreatType}`, setRetreats)
-  }, [currPage, retreatType])
+    fetchData(`https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats?page=${currPage}&limit=3&tag=${retreatType}&title=${searchValue}
+`, setRetreats)
+  }, [currPage, retreatType, searchValue])
+
 
   const handleDateChange = (date) => {
     console.log(date)
@@ -47,6 +52,11 @@ function MainContent() {
 
   const handleTypeChange = (type) => {
     setRetreatType(type)
+    setCurrPage(1)
+  }
+
+  const handleTitleChange = (e) => {
+    setSearchTitle(e.target.value)
     setCurrPage(1)
   }
 
@@ -64,6 +74,8 @@ function MainContent() {
 
         <input
           type="text"
+          value={searchTitle}
+          onChange={(e) => handleTitleChange(e)}
           className="w-full sm:w-[30vw] inline-flex justify-center 
           gap-x-1.5 rounded-md border
           border-darkGrey sm:border-lightBlue
@@ -104,6 +116,7 @@ function MainContent() {
                 >
                   Next
                 </button>
+                {/* {currPage} */}
               </div>
             </>
       }
