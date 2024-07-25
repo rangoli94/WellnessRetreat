@@ -1,9 +1,9 @@
 import React from 'react';
-import './Loader.css'; // Assuming you have a CSS file for styling
+import './Loader.css';
 
 const Loader = () => {
   return (
-    <div className="loader-container">
+    <div className="loader-container py-10">
       <div className="spinner"></div>
     </div>
   );

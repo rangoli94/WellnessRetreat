@@ -18,7 +18,7 @@ function MainContent() {
       const response = await axios.get(url)
       setError(null)
       setter(response?.data)
-    } catch(err) {
+    } catch (err) {
       setError(err.message || 'An error occurred');
     } finally {
       setIsLoading(false)
@@ -53,36 +53,39 @@ function MainContent() {
       </div>
       {
         isLoading ? <Loader /> :
-        error ? <div>{error}</div> :
-        <DisplayRetreats retreats={retreats} />
-      }
-      
-      <div className='flex justify-center space-x-4'>
-        <button
-          onClick={() => setCurrPage(prev => prev - 1)}
-          disabled={currPage === 1}
-          className={`px-4 py-2 font-semibold rounded-lg 
+          error ? <div>{error}</div> :
+            <>
+              <DisplayRetreats retreats={retreats} />
+              <div className='flex justify-center space-x-4'>
+                <button
+                  onClick={() => setCurrPage(prev => prev - 1)}
+                  disabled={currPage === 1}
+                  className={`px-4 py-2 font-semibold rounded-lg 
             ${currPage === 1 ?
-              "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
-              "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
-            }
+                      "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
+                      "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
+                    }
             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
-        >
-          Previous
-        </button>
-        <button
-          onClick={() => setCurrPage(prev => prev + 1)}
-          disabled={retreats.length <= 0}
-          className={`px-4 py-2 font-semibold rounded-lg 
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setCurrPage(prev => prev + 1)}
+                  disabled={retreats.length <= 0}
+                  className={`px-4 py-2 font-semibold rounded-lg 
             ${retreats.length <= 0 ?
-              "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
-              "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
-            }
+                      "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
+                      "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
+                    }
             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
-        >
-          Next
-        </button>
-      </div>
+                >
+                  Next
+                </button>
+              </div>
+            </>
+      }
+
+
     </div>
 
   )
