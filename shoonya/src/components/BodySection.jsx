@@ -5,8 +5,8 @@ import MainContent from './MainContent'
 export default function BodySection() {
   return (
     <div className='px-2 py-5'>
-        <BodyHeader />
-        <MainContent />
+      <BodyHeader />
+      <MainContent />
     </div>
   )
 }

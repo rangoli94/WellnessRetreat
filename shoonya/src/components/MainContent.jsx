@@ -89,12 +89,12 @@ function MainContent() {
           value={searchTitle}
           onChange={(e) => handleTitleChange(e)}
           className="w-full sm:w-[30vw] inline-flex justify-center 
-          gap-x-1.5 rounded-md border
-          border-darkGrey sm:border-lightBlue
-          bg-lightGrey text-black sm:bg-darkBlue sm:text-white 
-          hover:bg-lightGrey sm:hover:bg-lightBlue 
-          px-3 py-2 text-lg sm:text-sm 
-          font-semibold shadow-sm placeholder-black sm:placeholder-white"
+            gap-x-1.5 rounded-md border
+            border-darkGrey sm:border-lightBlue
+            bg-lightGrey text-black sm:bg-darkBlue sm:text-white 
+            hover:bg-lightGrey sm:hover:bg-lightBlue 
+            px-3 py-2 text-lg sm:text-sm 
+            font-semibold shadow-sm placeholder-black sm:placeholder-white"
           placeholder="Search Retreats by Title"
         />
       </div>
@@ -104,7 +104,7 @@ function MainContent() {
             <div className='flex justify-center'>
               <div
                 className="text-red-600 bg-red-100 border border-red-400 rounded p-2 mt-10 text-center
-              inline-block"
+                  inline-block"
               >
                 {error}
               </div>
@@ -119,11 +119,11 @@ function MainContent() {
                     onClick={() => setCurrPage(prev => prev - 1)}
                     disabled={currPage === 1}
                     className={`px-4 py-2 font-semibold rounded-lg 
-                  ${currPage === 1 ?
+                      ${currPage === 1 ?
                         "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
                         "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
                       }
-                  focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
+                      focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
                   >
                     Previous
                   </button>
@@ -131,11 +131,11 @@ function MainContent() {
                     onClick={() => setCurrPage(prev => prev + 1)}
                     disabled={retreats.length < 3}
                     className={`px-4 py-2 font-semibold rounded-lg 
-                  ${retreats.length < 3 ?
+                      ${retreats.length < 3 ?
                         "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
                         "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
                       }
-                  focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
+                      focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75`}
                   >
                     Next
                   </button>
@@ -144,7 +144,7 @@ function MainContent() {
               <div className='flex justify-center'>
                 <div
                   className="text-blue-600 bg-blue-100 border border-blue-400 rounded p-2 my-10 text-center
-                inline-block"
+                    inline-block"
                 >
                   No data to display
                 </div>

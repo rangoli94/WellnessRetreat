@@ -11,7 +11,7 @@ function DisplayRetreats({ retreats, currPage }) {
                     description={retreat.description} date={retreat.date}
                     location={retreat.location} price={retreat.price}
                     image={retreat.image} duration={retreat.duration}
-                />) 
+                />)
             }
         </div>
     )
