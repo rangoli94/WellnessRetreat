@@ -17,7 +17,6 @@ function MainContent() {
   const [retreatType, setRetreatType] = useState("")
   const [searchTitle, setSearchTitle] = useState("")
   const [searchValue] = useDebounce(searchTitle, 100);
-  console.log(currPage)
 
   const fetchData = async (url, setter) => {
     try {
@@ -35,7 +34,6 @@ function MainContent() {
 
   useEffect(() => {
     fetchData(`https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats`, setAllRetreats)
-    console.log(allRetreats)
   }, [])
 
   useEffect(() => {
@@ -53,7 +51,6 @@ function MainContent() {
       let endDate = retreat.date + (retreat.duration * 24 * 60 * 60)
       return (retreat.date <= unixTimestamp && unixTimestamp <= endDate)
     })
-    console.log(filteredRetreat)
     setIsDateFilterAdded(true)
     setRetreats([...filteredRetreat])
     setRetreatType("")
