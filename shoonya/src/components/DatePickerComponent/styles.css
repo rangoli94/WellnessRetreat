@@ -7,7 +7,7 @@
 }
 
 .react-datepicker__triangle {
-  display: none; /* Hide the default triangle */
+  display: none; 
 }
 
 .react-datepicker-popper {

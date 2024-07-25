@@ -31,36 +31,36 @@ export default function Dropdown({title, handleTypeChange, retreatType}) {
       >
         <div className="py-1">
           <MenuItem>
-            <button
+            <div
             onClick={() => handleTypeChange("Yoga")}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className="block px-4 py-2 sm:text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               Yoga
-            </button>
+            </div>
           </MenuItem>
           <MenuItem>
-            <button
+            <div
             onClick={() => handleTypeChange("Meditation")}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className="block px-4 py-2 sm:text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               Meditation
-            </button>
+            </div>
           </MenuItem>
           <MenuItem>
-            <button
+            <div
             onClick={() => handleTypeChange("Detox")}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className="block px-4 py-2 sm:text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               Detox
-            </button>
+            </div>
           </MenuItem>
           <MenuItem>
-            <button
+            <div
             onClick={() => handleTypeChange("")}
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
+              className="block px-4 py-2 sm:text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
             >
               Clear Selection
-            </button>
+            </div>
           </MenuItem>
         </div>
       </MenuItems>

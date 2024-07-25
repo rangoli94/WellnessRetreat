@@ -1,7 +1,6 @@
 import React from 'react'
 import BodyHeader from './BodyHeader'
 import MainContent from './MainContent'
-import FooterSection from './FooterSection'
 
 export default function BodySection() {
   return (
