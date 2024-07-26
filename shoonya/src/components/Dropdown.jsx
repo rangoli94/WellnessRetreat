@@ -31,7 +31,7 @@ export default function Dropdown({ title, handleTypeChange, selectedVal, options
       >
         <div className="py-1">
           {
-            optionsArray?.map((option,id) => (
+            optionsArray?.map((option, id) => (
               <MenuItem key={id}>
                 <div
                   onClick={() => handleTypeChange(option.passingParam)}

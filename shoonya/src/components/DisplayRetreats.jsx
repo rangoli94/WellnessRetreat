@@ -1,8 +1,9 @@
 import React from 'react'
 import CardComponent from './CardComponent'
+import { PER_PAGE_LIMIT } from '../Constants'
 
 function DisplayRetreats({ retreats, currPage }) {
-    const filterRetreats = retreats.length > 3 ? retreats.slice((currPage * 3) - 3, currPage * 3) : retreats
+    const filterRetreats = retreats.length > PER_PAGE_LIMIT ? retreats.slice((currPage * PER_PAGE_LIMIT) - PER_PAGE_LIMIT, currPage * PER_PAGE_LIMIT) : retreats
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 py-5">

@@ -32,3 +32,5 @@ export const DATE_RANGE = [
     }
 
 ]
+
+export const PER_PAGE_LIMIT = 3;
