@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const baseURL = 'https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats';
