@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
-import DatePickerComponent from './DatePickerComponent/DatePickerComponent'
 import DisplayRetreats from './DisplayRetreats';
 import axios from 'axios';
 import Loader from './Loader/Loader';
 import { useDebounce } from 'use-debounce';
+import { RETREAT_TYPE, DATE_RANGE} from '../Constants'
+
 
 function MainContent() {
   const [allRetreats, setAllRetreats] = useState([])
@@ -12,11 +13,11 @@ function MainContent() {
   const [currPage, setCurrPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDateRange, setSelectedDateRange] = useState("");
   const [isDateFilterAdded, setIsDateFilterAdded] = useState(false)
   const [retreatType, setRetreatType] = useState("")
   const [searchTitle, setSearchTitle] = useState("")
-  const [searchValue] = useDebounce(searchTitle, 100);
+  const [searchValue] = useDebounce(searchTitle, 500);
 
   const fetchData = async (url, setter) => {
     try {
@@ -25,6 +26,7 @@ function MainContent() {
       setError(null)
       setter([...response?.data])
     } catch (err) {
+      console.log(err)
       setError(err.message || 'An error occurred');
     } finally {
       setIsLoading(false)
@@ -44,17 +46,22 @@ function MainContent() {
   }, [currPage, retreatType, searchValue])
 
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    const unixTimestamp = Math.floor(date.getTime() / 1000);
-    const filteredRetreat = allRetreats.filter(retreat => {
-      let endDate = retreat.date + (retreat.duration * 24 * 60 * 60)
-      return (retreat.date <= unixTimestamp && unixTimestamp <= endDate)
-    })
-    setIsDateFilterAdded(true)
-    setRetreats([...filteredRetreat])
-    setRetreatType("")
-    setSearchTitle("")
+  const handleDateChange = (dateRangeObj) => {
+    console.log(dateRangeObj)
+    if(dateRangeObj) {
+      const filteredRetreat = allRetreats.filter(retreat => {
+        let endDate = retreat.date + (retreat.duration * 24 * 60 * 60)
+        return (dateRangeObj.startEPOC <= retreat.date && endDate < dateRangeObj.endEPOC)
+      })
+      setIsDateFilterAdded(true)
+      setRetreats([...filteredRetreat])
+      setSelectedDateRange(dateRangeObj.tag)
+      setRetreatType("")
+      setSearchTitle("")
+    } else {
+      setIsDateFilterAdded(false)
+      setSelectedDateRange("")
+    }
     setCurrPage(1)
   };
 
@@ -62,14 +69,14 @@ function MainContent() {
     setRetreatType(type)
     setCurrPage(1)
     setIsDateFilterAdded(false)
-    setSelectedDate(new Date())
+    setSelectedDateRange("")
   }
 
   const handleTitleChange = (e) => {
     setSearchTitle(e.target.value)
     setCurrPage(1)
     setIsDateFilterAdded(false)
-    setSelectedDate(new Date())
+    setSelectedDateRange("")
   }
 
   return (
@@ -77,11 +84,19 @@ function MainContent() {
       <div className="flex flex-col sm:flex-row items-center justify-between w-full">
 
         <div className="flex flex-col sm:flex-row w-full">
-          <DatePickerComponent
-            selectedDate={selectedDate}
-            handleDateChange={handleDateChange}
+           <Dropdown 
+            title={"Filter by Date"} 
+            handleTypeChange={handleDateChange} 
+            selectedVal={selectedDateRange} 
+            optionsArray={DATE_RANGE} 
+           />
+          <Dropdown 
+            title={"Filter by Type"} 
+            handleTypeChange={handleTypeChange} 
+            selectedVal={retreatType} 
+            optionsArray={RETREAT_TYPE}
           />
-          <Dropdown title={"Filter by Type"} handleTypeChange={handleTypeChange} retreatType={retreatType} />
+
         </div>
 
         <input
@@ -131,7 +146,7 @@ function MainContent() {
                     onClick={() => setCurrPage(prev => prev + 1)}
                     disabled={retreats.length < 3}
                     className={`px-4 py-2 font-semibold rounded-lg 
-                      ${retreats.length < 3 ?
+                      ${retreats.length < 3 || (retreats.length > 3 && currPage === Math.ceil(retreats.length / 3))?
                         "bg-gray-400 text-gray-600 cursor-not-allowed opacity-50 border border-gray-500 shadow-none" :
                         "bg-darkBlue text-white hover:bg-lightBlue shadow-md"
                       }
